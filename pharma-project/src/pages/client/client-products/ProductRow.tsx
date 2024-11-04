@@ -19,17 +19,10 @@ export default function ProductRow(props: ProductRowProps) {
                 <div className="col-span-2 overflow-hidden">{props.belong_point_program}</div>
                 <div className="col-span-2 overflow-hidden">{props.balance}</div>
                 <div className="col-span-1 overflow-hidden">
-                    {/* Usamos la prop action en lugar de onClick */}
-
                     <ButtonWithImage image_name={InspectIcon} action={props.onViewDetails} />
-                    
-                    
-                    {/*<ButtonWithImage 
-                        image_name='inspect-icon-green-3.png' 
-                        action={props.onViewDetails}  // Pasamos la función onViewDetails
-                    />*/}
                 </div>
             </div>
         </div>
     );
 }
+
