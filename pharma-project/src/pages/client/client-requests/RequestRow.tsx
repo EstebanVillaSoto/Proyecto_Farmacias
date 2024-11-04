@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ButtonWithImage from "../../../components/ui/ButtonWithImage"
 import ModalInspectRequest from "./ModalInspectRequest";
+import InspectIcon from "../../../assets/inspect-icon-green-3.png";
 
 type RequestRowProps = {
     request_id: number,
@@ -20,7 +21,7 @@ export default function RequestRow(props: RequestRowProps) {
                 <div className="col-span-1 overflow-hidden">{props.request_state}</div>
                 <div className="col-span-2 overflow-hidden"></div> {/* Espacio vacío para relleno */}
                 <div className="col-span-1 overflow-hidden">
-                    <ButtonWithImage image_name='inspect-icon-green-3.png' action={() => setShowModal(true)}/>
+                    <ButtonWithImage image_name={InspectIcon} action={() => setShowModal(true)} />
                 </div>
             </div>
             <ModalInspectRequest requestId={props.request_id} show={showModal} close={() => setShowModal(false)}/>

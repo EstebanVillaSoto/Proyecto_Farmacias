@@ -1,4 +1,6 @@
 import ButtonWithImage from "../../../components/ui/ButtonWithImage";
+import InspectIcon from "../../../assets/inspect-icon-green-3.png";
+
 
 type ProductRowProps = {
     Name: string;
@@ -18,10 +20,14 @@ export default function ProductRow(props: ProductRowProps) {
                 <div className="col-span-2 overflow-hidden">{props.balance}</div>
                 <div className="col-span-1 overflow-hidden">
                     {/* Usamos la prop action en lugar de onClick */}
-                    <ButtonWithImage 
+
+                    <ButtonWithImage image_name={InspectIcon} action={props.onViewDetails} />
+                    
+                    
+                    {/*<ButtonWithImage 
                         image_name='inspect-icon-green-3.png' 
                         action={props.onViewDetails}  // Pasamos la función onViewDetails
-                    />
+                    />*/}
                 </div>
             </div>
         </div>
