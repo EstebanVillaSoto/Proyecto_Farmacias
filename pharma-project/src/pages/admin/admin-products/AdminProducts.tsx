@@ -11,7 +11,8 @@ export default function AdminProducts() {
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<any>(null);
     const [searchValue, setSearchValue] = useState<string>("");
-    const [products, setProducts] = useState<any[]>([]);
+    //const [products, setProducts] = useState<any[]>([]);
+    const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -21,7 +22,7 @@ export default function AdminProducts() {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setProducts(data);
+                setFilteredProducts(data);
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
@@ -49,7 +50,7 @@ export default function AdminProducts() {
     };
 
     const handleUpdateProduct = (updatedProduct: any) => {
-        setProducts((prevProducts) =>
+        setFilteredProducts((prevProducts) =>
             prevProducts.map((product) =>
                 product.id === updatedProduct.id ? updatedProduct : product
             )
@@ -75,7 +76,7 @@ export default function AdminProducts() {
                 <div className="col-span-2">Presentación</div>
                 <div className="col-span-2">Pertenece al programa de puntos</div>
             </div>
-
+            {/*}    
             <div className="flex flex-col gap-4 overflow-auto h-96">
                 {products.filter(product => product.only_name.toLowerCase().includes(searchValue.toLowerCase())).map(product => (
                     <ProductRow
@@ -84,6 +85,23 @@ export default function AdminProducts() {
                         presentation={product.product_form}
                         belong_point_program={product.is_in_program ? "Sí" : "No"} // Lógica para el programa de puntos
                         onViewDetails={() => openModal(product)}          
+                    />
+                ))}
+            </div>
+            */}
+            
+
+
+            <div className="flex flex-col gap-4 overflow-auto h-96">
+                {/* Mapeamos sobre los productos filtrados */}
+                {filteredProducts.map((product) => (
+                    <ProductRow
+                        key={product.id} // Asegúrate de que cada producto tiene un ID único
+                        Name={product.only_name}
+                        presentation={product.product_form}
+                        belong_point_program={product.is_in_program ? "Sí" : "No"}
+                        //balance={product.points_count} // 
+                        onViewDetails={() => openModal(product)}
                     />
                 ))}
             </div>
