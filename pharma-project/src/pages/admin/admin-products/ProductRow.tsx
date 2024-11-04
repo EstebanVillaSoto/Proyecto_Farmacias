@@ -12,7 +12,7 @@ type ProductRowProps = {
 export default function ProductRow(props: ProductRowProps) {
     return (
         <div>
-            <div className="grid grid-cols-custom-1 gap-4 bg-green-1 p-4 w-auto items-center text-green-3">
+            <div className="grid grid-cols-custom-1 gap-4 bg-green-1 p-4 w-auto items-center text-green-3 rounded">
                 <div className="col-span-1 overflow-hidden">{props.Name}</div>
                 <div className="col-span-2 overflow-hidden">{props.presentation}</div>
                 <div className="col-span-2 overflow-hidden">{props.belong_point_program}</div>

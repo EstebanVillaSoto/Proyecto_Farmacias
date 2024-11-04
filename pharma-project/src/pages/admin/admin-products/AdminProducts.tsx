@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import SearchBar from "../../../components/SearchBar";
-import ProductRow from "./ProductRow";
+import ProductRow from "../../../pages/client/client-products/ClientProductRow";
+
 //import Modal from './ModalInspectProduct';
 //import ModalRegisterProgram from './ModalRegisterProgram';
 import AdminNavbar from '../../../components/AdminNavbar';
