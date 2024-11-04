@@ -7,9 +7,9 @@ import AdminNavbar from '../../../components/AdminNavbar';
 import Title from '../../../components/ui/Title';
 
 export default function AdminProducts() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState<any>(null);
+    //const [isModalOpen, setIsModalOpen] = useState(false);
+    //const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    //const [selectedProduct, setSelectedProduct] = useState<any>(null);
     const [searchValue, setSearchValue] = useState<string>("");
     const [products, setProducts] = useState<any[]>([]);
 
@@ -30,22 +30,15 @@ export default function AdminProducts() {
         fetchProducts();
     }, []);
 
-    const openModal = async(product: any) => {
-        try{
-            const response = await fetch(`https://pr-disenno-backend-production.up.railway.app/products/${product.id}`);
-            if (!response.ok) throw new Error('Failed to fetch product details');
-            const detailedProduct = await response.json();
-            setSelectedProduct(detailedProduct);
-            setIsModalOpen(true);
-        } catch (error) {
-            console.error('Error fetching product details:', error);
-        }
-        
-    };
+    
 
     
 
     
+
+    function openModal(_product: any): void {
+        throw new Error('Function not implemented.');
+    }
 
     return (
         <div className='flex flex-col justify-start items-center w-full'>
