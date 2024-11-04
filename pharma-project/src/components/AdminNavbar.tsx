@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import './Navbar.css';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../App';
+import UserIcon from '../assets/user-icon-green-1.png';
 
 const AdminNavbar: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -51,7 +52,7 @@ const AdminNavbar: React.FC = () => {
       </ul>
 
       <div className="profile-icon" onClick={() => toggleDropdown('perfil')}>
-        <img src="src/assets/user-icon-green-1.png" alt="Perfil" />
+        <img src={UserIcon} alt="" />
         {activeDropdown === 'perfil' && (
           <ul className="dropdown-menu">
             <li>Perfil</li>
