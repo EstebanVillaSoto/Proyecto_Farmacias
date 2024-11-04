@@ -59,6 +59,7 @@ export default function AdminProducts() {
                         Name={product.only_name}
                         presentation={product.product_form}
                         belong_point_program={product.is_in_program ? "Sí" : "No"} // Lógica para el programa de puntos
+                        balance={product.points_count}
                         onViewDetails={() => openModal(product)}          
                     />
                 ))}
