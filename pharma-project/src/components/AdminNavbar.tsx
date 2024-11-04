@@ -52,7 +52,7 @@ const AdminNavbar: React.FC = () => {
       </ul>
 
       <div className="profile-icon" onClick={() => toggleDropdown('perfil')}>
-        <img src={UserIcon} alt="" />
+        
         {activeDropdown === 'perfil' && (
           <ul className="dropdown-menu">
             <li>Perfil</li>
