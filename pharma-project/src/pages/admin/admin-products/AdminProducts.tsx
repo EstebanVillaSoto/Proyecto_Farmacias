@@ -53,7 +53,7 @@ export default function AdminProducts() {
             </div>
 
             <div className="flex flex-col gap-4 overflow-auto h-96">
-                {products.filter(product => product.only_name.toLowerCase().includes(searchValue.toLowerCase())).map(product => (
+                {products.map((product) => (
                     <ProductRow
                         key={product.id}
                         Name={product.only_name}
