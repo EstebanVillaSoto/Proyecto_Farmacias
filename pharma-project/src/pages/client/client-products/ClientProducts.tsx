@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import SearchBar from "../../../components/SearchBar";
-import ProductRow from "./ProductRow";
+import ProductRow from "./ClientProductRow";
 import Modal from './ModalInspectProduct';
 import ClientNavbar from '../../../components/ClientNavbar';
 import Title from '../../../components/ui/Title';
