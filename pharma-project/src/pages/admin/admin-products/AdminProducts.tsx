@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import SearchBar from "../../../components/SearchBar";
-import ProductRow from "./ProductRow";
+import ProductRow1 from "./ProductRow";
 import Modal from './ModalInspectProduct';
 import ModalRegisterProgram from './ModalRegisterProgram';
 import AdminNavbar from '../../../components/AdminNavbar';
@@ -82,7 +82,7 @@ export default function AdminProducts() {
 
             <div className="flex flex-col gap-4 overflow-auto h-96">
                 {filteredProducts.map((product) => (
-                    <ProductRow
+                    <ProductRow1
                         key={product.id}
                         Name={product.only_name}
                         presentation={product.product_form}
