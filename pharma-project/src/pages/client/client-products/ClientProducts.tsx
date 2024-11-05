@@ -47,7 +47,7 @@ export default function ClientProducts() {
 
     const openModal = async (product: any) => {
         try{
-            const response = await fetch(`https://pr-disenno-backend-production.up.railway.app/products/${product.id}`);
+            const response = await fetch(`https://pr-disenno-backend-production.up.railway.app/products/${product.id}/user/${user.id}`);
             if (!response.ok) throw new Error('Failed to fetch product details');
             const detailedProduct = await response.json();
             setSelectedProduct(detailedProduct);
