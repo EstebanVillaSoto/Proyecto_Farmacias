@@ -16,7 +16,7 @@ export default function AdminProducts() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('https://pr-disenno-backend-production.up.railway.app/products/'); // Cambia esto por la URL de tu API
+                const response = await fetch('https://pr-disenno-backend-production.up.railway.app/products'); // Cambia esto por la URL de tu API
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
