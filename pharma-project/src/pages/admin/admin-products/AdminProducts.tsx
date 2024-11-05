@@ -64,6 +64,10 @@ export default function AdminProducts() {
         setIsRegisterModalOpen(false);
     };
 
+
+    const filteredProducts = products.filter(products =>
+        products.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
     return (
         <div className='flex flex-col justify-start items-center w-full'>
             <AdminNavbar />
@@ -77,7 +81,7 @@ export default function AdminProducts() {
             </div>
 
             <div className="flex flex-col gap-4 overflow-auto h-96">
-                {products.filter(product => product.only_name.toLowerCase().includes(searchValue.toLowerCase())).map(product => (
+                {filteredProducts.map((product) => (
                     <ProductRow
                         key={product.id}
                         Name={product.only_name}
