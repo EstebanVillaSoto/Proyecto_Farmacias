@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import SearchBar from "../../../components/SearchBar";
 import RequestRow from "./RequestRow";
 import Title from "../../../components/ui/Title";
-import SendRequestModal from "./SendRequestModal";
+
 import ClientNavbar from "../../../components/ClientNavbar";
 import { UserContext } from "../../../App";
 
 export default function ClientRequests() {
     const [requests, setRequests] = useState([]);
-    const [open, setOpen] = useState(false);
+    
     const [searchValue, setSearchValue] = useState<string>("");
     const [loading, setLoading] = useState(true);
     
@@ -46,15 +46,12 @@ export default function ClientRequests() {
             <Title title="My Requests" green="1" className="p-5"></Title>
             <SearchBar
                 place_holder="Invoice ID"
-                filter={true}
+                filter={false}
                 onSearchChange={setSearchValue}
                 onClickSearch={searchRequests}
-                onClickFilter={() => setOpen(true)} 
+                
                 value={searchValue}/>
-            <SendRequestModal
-                onClose={() => setOpen(false)}
-                show={open}
-            ></SendRequestModal>
+            
             {loading? <div><strong className="text-xl text-green-1">Loading...</strong></div> : (
                 <>
                 <div className="grid grid-cols-custom-1 gap-4 p-4 w-auto items-center text-green-1">

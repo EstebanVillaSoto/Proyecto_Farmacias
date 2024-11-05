@@ -1,4 +1,5 @@
 import ClientNavbar from "../../../components/ClientNavbar";
+import imagen2 from "../../../assets/pharmacy2.jpg";
 
 export default function AdminHomeScreen() {
   return (
@@ -25,9 +26,8 @@ export default function AdminHomeScreen() {
           </p>
         </div>
 
-        {/* Contenedor para la imagen */}
-        <div className="w-1/3 h-96 bg-gray-200 rounded-lg flex items-center justify-center ml-10">
-          <p className="text-black">Aqui va la imagen</p>
+        <div className="w-1/3 bg-gray-200 rounded-lg flex items-center justify-center ml-10">
+          <img src={imagen2} alt="Imagen" className="w-full h-full object-contain rounded-lg p-2" />
         </div>
       </div>
     </div>

@@ -4,9 +4,13 @@ import './Navbar.css';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../App';
 import UserIcon from '../assets/user-icon-green-1.png';
+import ProfileInfo from './ProfileInfo';
+import SendRequestModal from '../pages/client/client-requests/SendRequestModal';
 
 const AdminNavbar: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showProfileModal, setShowProfileModal] = useState<boolean>(false); // Nuevo estado para controlar el modal de perfil
   const [, setUser] = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -19,6 +23,16 @@ const AdminNavbar: React.FC = () => {
     sessionStorage.removeItem("user");
     navigate('/login');
   }
+
+  const handleProfileClick = () => {
+    setShowProfileModal(true); // Muestra el modal de perfil
+  };
+
+  const closeProfileModal = () => {
+    setShowProfileModal(false); // Cierra el modal de perfil
+  };
+
+
   return (
     <nav className="navbar">
       <ul className="navbar-menu">
@@ -49,17 +63,30 @@ const AdminNavbar: React.FC = () => {
             </ul>
           )}
         </li>
+
+        <li className="navbar-item" onClick={() => navigate('/admin-home')}>
+          Volver al Inicio
+        </li>
+
+        
       </ul>
 
       <div className="profile-icon" onClick={() => toggleDropdown('perfil')}>
         <img src={UserIcon} alt="" />
         {activeDropdown === 'perfil' && (
           <ul className="dropdown-menu">
-            <li>Perfil</li>
+            <li onClick={handleProfileClick}>Perfil</li>
             <li onClick={handleLogout}>Salir</li>
           </ul>
         )}
       </div>
+      <SendRequestModal show={showModal} onClose={() => setShowModal(false)}></SendRequestModal>
+
+      {/* Renderiza ProfileInfo si showProfileModal es true */}
+      {showProfileModal && (
+        <ProfileInfo closeModal={closeProfileModal} />
+      )}  
+
     </nav>
   );
 };

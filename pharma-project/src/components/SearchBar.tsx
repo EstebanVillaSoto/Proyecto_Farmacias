@@ -1,6 +1,6 @@
 import ButtonWithImage from "./ui/ButtonWithImage";
 import SearchIcon from "../assets/search-icon-green-1.png";
-import FilterIcon from "../assets/filter-icon-green-1.png";
+//import FilterIcon from "../assets/filter-icon-green-1.png";
 
 type SearchBarProps = {
     place_holder: string;
@@ -27,7 +27,7 @@ export default function SearchBar(props: SearchBarProps) {
                 />
             </div>
             <ButtonWithImage image_name={SearchIcon} action={props.onClickSearch || (() => {})} />
-            {props.filter && <ButtonWithImage image_name={FilterIcon} action={props.onClickFilter || (() => {})} />}
+            
         </div>
     );
 }
