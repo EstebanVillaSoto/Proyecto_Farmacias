@@ -51,6 +51,19 @@ export default function AdminProducts() {
                 <div className="col-span-1">Nombre</div>
                 <div className="col-span-2">Presentación</div>
                 <div className="col-span-2">Pertenece al programa de puntos</div>
+
+                <div className="flex flex-col gap-4 overflow-auto h-96">
+                {products.map((product) => (
+                    <ProductRow
+                        key={product.id}
+                        Name={product.only_name}
+                        presentation={product.product_form}
+                        belong_point_program={product.is_in_program ? "Sí" : "No"} // Lógica para el programa de puntos
+                        balance={product.points_count}
+                        onViewDetails={() => openModal(product)}          
+                    />
+                ))}
+            </div>
             </div>
 
             <div className="flex flex-col gap-4 overflow-auto h-96">
