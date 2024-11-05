@@ -24,10 +24,15 @@ export default function SendRequestModal(props: SendRequestModalProps) {
     
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            setImage(URL.createObjectURL(e.target.files[0]));
-            setImageUploaded(true);
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImage(reader.result as string);
+                setImageUploaded(true);
+            };
+            reader.readAsDataURL(file);
         }
-    }
+    };
     const handleSendRequest = async () => {
         console.log("Sending request...");
         if (invoiceId === 0 || purchaseDate === "" || selectedPharmacyId === 0 || selectedProductId === 0 || quantity === 0 || !imageUploaded) {
@@ -49,7 +54,7 @@ export default function SendRequestModal(props: SendRequestModalProps) {
                         pharmacy_id: selectedPharmacyId,
                         product_id: selectedProductId,
                         product_quantity: quantity,
-                        invoice_image: "imageBase64",
+                        invoice_image: image,
                         user_id: user.id
                     })
                 }

@@ -3,8 +3,6 @@ import Title from "../../../components/ui/Title";
 import Modal from "../../../components/ui/Modal";
 import DetailGrid from "../../../components/DetailGrid";
 
-const IMAGE_URL = "src/assets/";
-
 type ModalInspectRequestProps = {
     requestId: number;
     show: boolean;
@@ -42,7 +40,6 @@ export default function ModalInspectRequest(props: ModalInspectRequestProps) {
             setLoading(false);
         }
     };
-    
     return (
         <Modal show={props.show} onClose={props.close}>
             <Title title="Request Details" green="1" className="mb-4" />
@@ -97,7 +94,7 @@ export default function ModalInspectRequest(props: ModalInspectRequestProps) {
                         <div
                             className="flex-shrink-0 h-96 w-80 bg-cover bg-no-repeat bg-center rounded-lg shadow-md"
                             style={{
-                                backgroundImage: `url(${IMAGE_URL}factura-ejemplo.jpg)`,
+                                backgroundImage: `url(${request.invoice_image})`,
                             }}
                         ></div>
                     </div>
