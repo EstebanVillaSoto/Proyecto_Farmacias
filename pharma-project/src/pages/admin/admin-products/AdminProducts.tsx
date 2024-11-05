@@ -73,6 +73,7 @@ export default function AdminProducts() {
             <AdminNavbar />
             <Title title="Products" green='1' className='p-5' />
             <SearchBar place_holder="Nombre del medicamento" filter={false} onSearchChange={setSearchValue} value={searchValue} />
+            
 
             <div className="grid grid-cols-custom-1 gap-4 p-4 w-auto items-center text-green-1">
                 <div className="col-span-1">Nombre</div>
