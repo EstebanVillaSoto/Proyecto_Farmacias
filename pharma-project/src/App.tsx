@@ -29,10 +29,11 @@ const router = createBrowserRouter([
 ]);
 function App() {
   // Recupera el usuario almacenado en sessionStorage, permite hacer refresh sin perder la sesión del usuario. Se borra cuando se cierra el navegador.
-  //const initialUser = JSON.parse(sessionStorage.getItem("user") || "null");
+  const initialUser = JSON.parse(sessionStorage.getItem("user") || "null");
 
 
-  // COMENTAR ESTA LINEA PARA QUE FUNCIONE EL LOGIN, DESCOMENTAR LA DE ABAJO.  
+  //COMENTAR ESTA LINEA PARA QUE FUNCIONE EL LOGIN, DESCOMENTAR LA DE ABAJO.  
+  /*
    const [user, setUser] = useState<any>({
      id: 1,
      name: "admin",
@@ -40,8 +41,10 @@ function App() {
      is_admin: true,
    });
 
+   */
+
   // Usuario que se loguea
- // const [user, setUser] = useState<any>(initialUser);
+ const [user, setUser] = useState<any>(initialUser);
 
 
   // Actualiza sessionStorage cada vez que el usuario cambie
