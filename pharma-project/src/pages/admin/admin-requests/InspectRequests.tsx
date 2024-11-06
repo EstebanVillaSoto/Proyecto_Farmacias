@@ -140,10 +140,10 @@ export default function InspectRequests(props: ModalInspectRequestProps) {
                             />
                             <DetailGrid
                                 details={[
-                                    ["Name:", request.product?.name || "N/A"],
+                                    ["Name:", request.user.name || "N/A"],
                                     [
                                         "ID:",
-                                        request.product.product_form || "N/A",
+                                        request.user.identification || "N/A",
                                     ],
                                 ]}
                             />
