@@ -12,6 +12,10 @@ import AdminProducts from "./pages/admin/admin-products/AdminProducts";
 import AdminRequests from "./pages/admin/admin-requests/AdminRequests";
 import Register from "./pages/logins/Register";
 import PasswordRecovery from "./pages/logins/PasswordRecovery";
+import PharmacyHomeScreen from "./pages/pharmacy/Pharmacy-Home/PharmacyHomeScreen";
+//import VerCanjes from "./pages/pharmacy/canjes/verCanjes";
+//import CanjeAceptado from "./pages/pharmacy/canjes/canjeAceptado";
+//import CanjeRechazado from "./pages/pharmacy/canjes/canjeRechazado";
 
 
 export const UserContext = createContext<[any, React.Dispatch<React.SetStateAction<any>>] | any>(null);
@@ -25,6 +29,10 @@ const router = createBrowserRouter([
   {path: '/recover-password', element: <PasswordRecovery/>},
   {path: '/admin-home', element: <AdminHomeScreen/>},
   {path: '/client-home', element: <ClientHomeScreen/>},
+  {path: '/pharmacy-home', element: <PharmacyHomeScreen/>},
+  //{path: '/verCanjes', element: <VerCanjes/>},
+  //{path: '/canjeAceptado', element: <CanjeAceptado/>},
+  //{path: '/canjeRechazado', element: <CanjeRechazado/>},
   {path: '*', element: <div className="text-green-1 text-3xl font-bold absolute">404 Not Found</div>}
 ]);
 function App() {
