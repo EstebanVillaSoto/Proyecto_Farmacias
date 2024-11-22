@@ -1,7 +1,10 @@
 import ClientNavbar from "../../../components/ClientNavbar";
 import imagen2 from "../../../assets/pharmacy2.jpg";
+import { useState } from "react";
+import UserInfoModal from "../../pharmacy/pharmacy-users/UserInfoModal";
 
 export default function AdminHomeScreen() {
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className="flex flex-col w-full h-screen text-white bg-[#16423C]">
       <ClientNavbar /> {/* Navbar */}
@@ -13,7 +16,7 @@ export default function AdminHomeScreen() {
           style={{ maxWidth: '600px', marginRight: 'auto', marginLeft: '10%' }}
         >
           <h1 className="text-6xl font-bold underline">Tu Farmaceutica</h1>
-          <h2 className="text-5xl text-cyan-400 font-semibold underline">
+          <h2 onClick={() => setShowModal(true)}className="text-5xl text-cyan-400 font-semibold underline">
             En Linea
           </h2>
           <p className="text-2xl">
@@ -30,6 +33,7 @@ export default function AdminHomeScreen() {
           <img src={imagen2} alt="Imagen" className="w-full h-full object-contain rounded-lg p-2" />
         </div>
       </div>
+      <UserInfoModal show={showModal} onClose={() => setShowModal(false)}></UserInfoModal>
     </div>
   );
 }
