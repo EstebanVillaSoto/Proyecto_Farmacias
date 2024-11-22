@@ -33,7 +33,7 @@ export default function AdminHomeScreen() {
           <img src={imagen2} alt="Imagen" className="w-full h-full object-contain rounded-lg p-2" />
         </div>
       </div>
-      <UserInfoModal show={showModal} onClose={() => setShowModal(false)}></UserInfoModal>
+      <UserInfoModal show={showModal} onClose={() => setShowModal(false)} userId={2}></UserInfoModal>
     </div>
   );
 }

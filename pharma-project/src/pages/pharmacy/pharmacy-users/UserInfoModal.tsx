@@ -1,32 +1,52 @@
+import axios from "axios";
+
 import DetailGrid from "../../../components/DetailGrid";
 import Modal from "../../../components/ui/Modal";
 import Title from "../../../components/ui/Title";
 import ProductStatsRow from "./ProductStatsRow";
+import { useEffect, useState } from "react";
 
+const api = axios.create({
+    baseURL: "https://pr-disenno-backend-production.up.railway.app/"
+});
 type UserInfoModalProps = {
     show: boolean;
     onClose: () => void;
+    userId: number;
 };
 
 export default function UserInfoModal(props: UserInfoModalProps) {
+    const [user, setUser] = useState<any>(null);
+    useEffect(() => {
+        api.get(`/users/${props.userId}`)
+            .then((response) => {
+                console.log(response.data);
+                setUser(response.data);
+            })
+            .catch((error) => {
+                alert("Error al cargar la información del usuario");
+                console.log(error);
+            });
+    }, []);
+
     return (
-        <Modal show={props.show} onClose={props.onClose}>
+        user && <Modal show={props.show} onClose={props.onClose}>
             <div className="flex gap-3">
                 <div className="flex flex-col p-3">
-                    <Title title="Henry Castro" green="1"></Title>
+                    <Title title={user.name} green="1"></Title>
                     <DetailGrid
                         details={[
-                            ["Identificación:", "12312312312"],
-                            ["Correo Electrónico", "henry@gmail.com"],
+                            ["Identificación:", user.identification],
+                            ["Correo Electrónico", user.email],
                         ]}
                     ></DetailGrid>
                     <Title title="Estadísticas generales" green="1"></Title>
                     <DetailGrid
                         details={[
-                            ["Total de productos adquiridos:", "23"],
-                            ["Total de puntos globales acumulados:", "1000"],
-                            ["Puntos usados en canje:", "408"],
-                            ["Puntos disponibles:", "592"],
+                            ["Total de productos adquiridos:", user.stats.total_trades || 0],
+                            ["Total de puntos globales acumulados:", user.stats.total_points || 0],
+                            ["Puntos usados en canje:", user.stats.used_points || 0],
+                            ["Puntos disponibles:", user.stats.total_points || 0],
                         ]}
                     ></DetailGrid>
                 </div>
@@ -45,67 +65,19 @@ export default function UserInfoModal(props: UserInfoModalProps) {
                         </div>
                     </div>
                     <div className="flex flex-col gap-2 overflow-auto h-96">
-                        {/* Ponme unos 10 de estos con datos random */}
-                        <ProductStatsRow
-                            name="Producto 1"
-                            available_points={100}
-                            used_points={50}
-                            total_points={150}
-                        ></ProductStatsRow>
-                        <ProductStatsRow
-                            name="Producto 2"
-                            available_points={100}
-                            used_points={50}
-                            total_points={150}
-                        ></ProductStatsRow>
-                        <ProductStatsRow
-                            name="Producto 3"
-                            available_points={100}
-                            used_points={50}
-                            total_points={150}
-                        ></ProductStatsRow>
-                        <ProductStatsRow
-                            name="Producto 4"
-                            available_points={100}
-                            used_points={50}
-                            total_points={150}
-                        ></ProductStatsRow>
-                        <ProductStatsRow
-                            name="Producto 5"
-                            available_points={100}
-                            used_points={50}
-                            total_points={150}
-                        ></ProductStatsRow>
-                        <ProductStatsRow
-                            name="Producto 6"
-                            available_points={100}
-                            used_points={50}
-                            total_points={150}
-                        ></ProductStatsRow>
-                        <ProductStatsRow
-                            name="Producto 7"
-                            available_points={100}
-                            used_points={50}
-                            total_points={150}
-                        ></ProductStatsRow>
-                        <ProductStatsRow
-                            name="Producto 8"
-                            available_points={100}
-                            used_points={50}
-                            total_points={150}
-                        ></ProductStatsRow>
-                        <ProductStatsRow
-                            name="Producto 9"
-                            available_points={100}
-                            used_points={50}
-                            total_points={150}
-                        ></ProductStatsRow>
-                        <ProductStatsRow
-                            name="Producto 10"
-                            available_points={100}
-                            used_points={50}
-                            total_points={150}
-                        ></ProductStatsRow>
+                        {
+                            Object.keys(user.stats_per_product).map((key) => {
+                                return (
+                                    <ProductStatsRow
+                                        key={key}
+                                        name={key}
+                                        available_points={user.stats_per_product[key].available_points}
+                                        used_points={user.stats_per_product[key].used_points}
+                                        total_points={user.stats_per_product[key].total_points}
+                                    />
+                                );
+                            })
+                        }
                     </div>
                 </div>
             </div>
