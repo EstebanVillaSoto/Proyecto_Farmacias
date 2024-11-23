@@ -12,7 +12,7 @@ import AdminProducts from "./pages/admin/admin-products/AdminProducts";
 import AdminRequests from "./pages/admin/admin-requests/AdminRequests";
 import Register from "./pages/logins/Register";
 import PasswordRecovery from "./pages/logins/PasswordRecovery";
-import PharmacyHomeScreen from "./pages/pharmacy/pharmacy-home/PharmacyHomeScreen";
+import PharmacyHomeScreen from "./pages/pharmacy/Pharmacy-Home/PharmacyHomeScreen";
 import PharmacyUsers from "./pages/pharmacy/pharmacy-users/PharmacyUsers";
 
 
