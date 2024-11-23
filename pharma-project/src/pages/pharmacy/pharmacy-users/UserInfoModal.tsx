@@ -3,7 +3,7 @@ import axios from "axios";
 import DetailGrid from "../../../components/DetailGrid";
 import Modal from "../../../components/ui/Modal";
 import Title from "../../../components/ui/Title";
-import ProductStatsRow from "./ProductStatsRow";
+import ProductStatsRow from "./ProductStatsOfUserRow";
 import { useEffect, useState } from "react";
 
 const api = axios.create({

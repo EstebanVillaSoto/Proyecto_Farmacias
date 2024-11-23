@@ -12,11 +12,13 @@ import AdminProducts from "./pages/admin/admin-products/AdminProducts";
 import AdminRequests from "./pages/admin/admin-requests/AdminRequests";
 import Register from "./pages/logins/Register";
 import PasswordRecovery from "./pages/logins/PasswordRecovery";
+import PharmacyHomeScreen from "./pages/pharmacy/pharmacy-home/PharmacyHomeScreen";
+import PharmacyUsers from "./pages/pharmacy/pharmacy-users/PharmacyUsers";
 
 
 export const UserContext = createContext<[any, React.Dispatch<React.SetStateAction<any>>] | any>(null);
 const router = createBrowserRouter([
-  {path: '/', element: <ProtectedRoute adminComponent={<AdminHomeScreen/>} clientComponent={<ClientHomeScreen/>} />},
+  {path: '/', element: <ProtectedRoute adminComponent={<AdminHomeScreen/>} clientComponent={<ClientHomeScreen/>} pharmacyComponent={<PharmacyHomeScreen/>}/>},
   {path: '/login', element: <Login/>},
   {path: '/register', element: <Register/>},
   {path: '/requests', element: <ProtectedRoute adminComponent={<AdminRequests/>} clientComponent={<ClientRequests/>} />},
@@ -25,7 +27,8 @@ const router = createBrowserRouter([
   {path: '/recover-password', element: <PasswordRecovery/>},
   {path: '/admin-home', element: <AdminHomeScreen/>},
   {path: '/client-home', element: <ClientHomeScreen/>},
-  {path: '*', element: <div className="text-green-1 text-3xl font-bold absolute">404 Not Found</div>}
+  {path: '/pharmacy-home', element: <PharmacyHomeScreen/>},
+  {path: '/users', element: <PharmacyUsers/>}
 ]);
 function App() {
   // Recupera el usuario almacenado en sessionStorage, permite hacer refresh sin perder la sesión del usuario. Se borra cuando se cierra el navegador.

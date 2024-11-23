@@ -2,7 +2,13 @@ import { useContext } from "react";
 import { UserContext } from "../App";
 import Login from "../pages/logins/Login";
 
-export default function ProtectedRoute({adminComponent, clientComponent}: any) {
+type ProtectedRouteProps = {
+    adminComponent?: any;
+    clientComponent?: any;
+    pharmacyComponent?: any;
+};
+
+export default function ProtectedRoute(props: ProtectedRouteProps) {
     const userContext = useContext(UserContext);
 
     if (!userContext || !userContext[0]) {
@@ -11,5 +17,16 @@ export default function ProtectedRoute({adminComponent, clientComponent}: any) {
 
     const [user] = userContext;
 
-    return user.is_admin ? adminComponent : clientComponent;
+    if (user.is_admin){
+        return props.adminComponent;
+    }
+    else if (user.pharmacy_id != null){
+        if (!props.pharmacyComponent) {
+            return <div className="text-green-1 text-3xl font-bold absolute">404 Not Found</div>;
+        }
+        return props.pharmacyComponent;
+    }
+    else {
+        return props.clientComponent;
+    }
 }
