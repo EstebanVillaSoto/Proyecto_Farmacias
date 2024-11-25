@@ -5,15 +5,25 @@ import Title from "../../../components/ui/Title";
 
 import ClientNavbar from "../../../components/ClientNavbar";
 import { UserContext } from "../../../App";
+import { RequestSortByDateAsc, RequestSortByDateDesc, RequestSortByIdAsc, RequestSortByIdDesc, RequestSortDefault, RequestSortStrategy } from "../../../strategy/RequestSortStrategy";
 
 export default function ClientRequests() {
-    const [requests, setRequests] = useState([]);
+    const [requests, setRequests] = useState<any[]>([]);
     
     const [searchValue, setSearchValue] = useState<string>("");
     const [loading, setLoading] = useState(true);
+    const [sortStrategy, setSortStrategy] = useState<RequestSortStrategy>(new RequestSortDefault());
     
     const [user] = useContext(UserContext);
 
+    const sortingStrategyMap = {
+        "": new RequestSortDefault(),
+        "date-asc": new RequestSortByDateAsc(),
+        "date-desc": new RequestSortByDateDesc(),
+        "id-asc": new RequestSortByIdAsc(),
+        "id-desc": new RequestSortByIdDesc(),
+    }
+    
     useEffect(() => {
         fetchRequests();
     }, []); // Array vacío: se ejecuta solo una vez
@@ -38,8 +48,14 @@ export default function ClientRequests() {
         );
         const data = await response.json();
         console.log(data);
-        setRequests(data);
+        setRequests(sortStrategy.sort(data));
     };
+
+    const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value as keyof typeof sortingStrategyMap;
+        setSortStrategy(sortingStrategyMap[value]);
+        setRequests(sortStrategy.sort(requests));
+    }
     return (
         <div className="flex flex-col justify-start items-center w-full">
             <ClientNavbar/>
@@ -58,7 +74,23 @@ export default function ClientRequests() {
                     <div className="col-span-2">Invoice ID</div>
                     <div className="col-span-2">Product Name</div>
                     <div className="col-span-1">Request State</div>
-                    <div className="col-span-2"></div>{" "} 
+                    <div className="col-span-1"></div>
+                    <div className="col-span-1">
+                        <select className="bg-green-3" name="sorting" onChange={handleSortChange}>
+                            <option value="date-desc">
+                                Date - Descending
+                            </option>
+                            <option value="date-asc">
+                                Date - Ascending
+                            </option>
+                            <option value="id-desc">
+                                ID - Descending
+                            </option>
+                            <option value="id-asc">
+                                ID - Ascending
+                            </option>
+                        </select>
+                    </div>{" "} 
                 </div>
                 <div className="flex flex-col gap-3 overflow-auto h-96">
                 {/* Define una altura */}
