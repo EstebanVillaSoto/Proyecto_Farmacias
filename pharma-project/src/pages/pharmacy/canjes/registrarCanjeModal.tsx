@@ -3,6 +3,8 @@ import { useContext, useState } from 'react';
 import ProductDropDown from '../../../components/ProductDropDown';
 import UserDropDown from '../../../components/UserDropDown';
 import { UserContext } from '../../../App';
+import CanjeAceptado from './canjeAceptado';
+import CanjeRechazado from './canjeRechazado';
 
 type PharmacyInfoProps = {
     pharmacy: string;
@@ -21,19 +23,84 @@ export default function RegistrarCanjeModal(props: PharmacyInfoProps) {
 
     const [selectedClient, setSelectedClient] = useState<string>("");
     const [selectedProduct, setSelectedProduct] = useState<string>("");
-    const [quantity, setQuantity] = useState<string>('1');
+    const [quantity, setQuantity] = useState<number>(1);
+    const [showCanjeAceptado, setShowCanjeAceptado] = useState<boolean>(false);
+    const [showCanjeRechazado, setShowCanjeRechazado] = useState<boolean>(false);
 
-    function handleSubmit() {
+    function fetchUserPoints(userId: string) {
+        return fetch(`https://pr-disenno-backend-production.up.railway.app/users/${userId}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                return data.points;
+            })
+            .catch((error) => {
+                console.error('Error fetching user points:', error);
+            });
+    }
+
+    function fetchProductPoints(productId: string) {
+        return fetch(`https://pr-disenno-backend-production.up.railway.app/products/${productId}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                return data.points;
+            })
+            .catch((error) => {
+                console.error('Error fetching product points:', error);
+            });
+    }
+
+async  function handleSubmit() {
         // Enviar datos a la API
-        if (selectedClient === "" || selectedProduct === "" || quantity === "") {
+        if (!selectedClient || !selectedProduct || quantity <= 0) {
             alert('Faltan datos');
             return;
         }
+        // Validar que el cliente tenga suficientes puntos
+        else {
+            const response = await fetch(
+                "https://pr-disenno-backend-production.up.railway.app/trades",
+                
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json" // Asegúrate de establecer el tipo de contenido
+                    },
+                    body: JSON.stringify({
+                        product_id: Number(selectedProduct),
+                        quantity: quantity,
+                        user_id: Number(selectedClient),
+                        pharmacy_id: user.pharmacy_id,
+
+                    })
+                }
+            );
+            if (response.ok) {
+                alert("Se realizó el canje exitosamente");
+                props.closeModal();
+            } else {
+                alert("No hay suficientes puntos para realizar el canje");
+            }
+        };
+
+
+        
+    
         console.log('Cliente:', selectedClient);
-        console.log('Producto:', selectedProduct);
+        console.log('Producto:', Number(selectedProduct));
         console.log('Cantidad:', quantity);
         console.log('Farmacia:', user.pharmacy_id);
         // Mostrar mensaje acorde si la petición fue exitosa o no
+        
     }
 
     return (
@@ -82,7 +149,7 @@ export default function RegistrarCanjeModal(props: PharmacyInfoProps) {
                         <input
                             type="number"
                             value={quantity}
-                            onChange={(e) => setQuantity(e.target.value)}
+                            onChange={(e) => setQuantity(Number(e.target.value))}
                             className="w-full p-2 rounded-md bg-[#16423C] text-white border border-gray-500 focus:outline-none focus:ring-2"
                             min="1"
                         />
@@ -96,9 +163,16 @@ export default function RegistrarCanjeModal(props: PharmacyInfoProps) {
                 </div>
 
                 {/* Botón Confirmar */}
-                <div className="mt-4">
+                                <div className="mt-4">
                     <button
-                        onClick={() => handleSubmit()}
+                        onClick={() => {
+                            handleSubmit();
+                            if (showCanjeAceptado) {
+                                window.location.href = '/canjeAceptado';
+                            } else if (showCanjeRechazado) {
+                                window.location.href = '/canjeRechazado';
+                            }
+                        }}
                         className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-colors"
                     >
                         Confirmar

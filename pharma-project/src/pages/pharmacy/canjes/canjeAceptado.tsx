@@ -5,6 +5,7 @@ type CanjeAceptadoProps = {
     closeModal: () => void; // Función para cerrar el modal
     realizarOtroCanje: () => void; // Función para iniciar otro canje
     volverPaginaPrincipal: () => void; // Función para volver a la página principal
+    onClose: () => void;
 };
 
 export default function CanjeAceptado({
