@@ -3,8 +3,6 @@ import { useContext, useState } from 'react';
 import ProductDropDown from '../../../components/ProductDropDown';
 import UserDropDown from '../../../components/UserDropDown';
 import { UserContext } from '../../../App';
-import CanjeAceptado from './canjeAceptado';
-import CanjeRechazado from './canjeRechazado';
 
 type PharmacyInfoProps = {
     pharmacy: string;
@@ -24,40 +22,7 @@ export default function RegistrarCanjeModal(props: PharmacyInfoProps) {
     const [selectedClient, setSelectedClient] = useState<string>("");
     const [selectedProduct, setSelectedProduct] = useState<string>("");
     const [quantity, setQuantity] = useState<number>(1);
-    const [showCanjeAceptado, setShowCanjeAceptado] = useState<boolean>(false);
-    const [showCanjeRechazado, setShowCanjeRechazado] = useState<boolean>(false);
 
-    function fetchUserPoints(userId: string) {
-        return fetch(`https://pr-disenno-backend-production.up.railway.app/users/${userId}`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.status} ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                return data.points;
-            })
-            .catch((error) => {
-                console.error('Error fetching user points:', error);
-            });
-    }
-
-    function fetchProductPoints(productId: string) {
-        return fetch(`https://pr-disenno-backend-production.up.railway.app/products/${productId}`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.status} ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                return data.points;
-            })
-            .catch((error) => {
-                console.error('Error fetching product points:', error);
-            });
-    }
 
 async  function handleSubmit() {
         // Enviar datos a la API
@@ -167,11 +132,6 @@ async  function handleSubmit() {
                     <button
                         onClick={() => {
                             handleSubmit();
-                            if (showCanjeAceptado) {
-                                window.location.href = '/canjeAceptado';
-                            } else if (showCanjeRechazado) {
-                                window.location.href = '/canjeRechazado';
-                            }
                         }}
                         className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-colors"
                     >

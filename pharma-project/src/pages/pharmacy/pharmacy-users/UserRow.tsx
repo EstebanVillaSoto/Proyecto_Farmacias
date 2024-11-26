@@ -1,4 +1,3 @@
-import React from "react";
 import ButtonWithImage from "../../../components/ui/ButtonWithImage";
 import InspectIcon from "../../../assets/inspect-icon-green-3.png";
 import SeeIcon from "../../../assets/see-icon-green.png";

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 type ProductDropDownProps = {
     handleChange: (ProductId: number) => void;
     is_in_program: string;
-    onSelect: (product: string) => void;
 }
 export default function ProductDropDown(props: ProductDropDownProps) {
     const [Products, setProducts] = useState([]);
